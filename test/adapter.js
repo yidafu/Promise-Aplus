@@ -1,9 +1,13 @@
 const {PromiseAplus} = require('../lib/index')
 
 module.exports.deferred = function(){
+  let resolve, reject;
   return {
-    promise: PromiseAplus.resolve(),
-    resolve: PromiseAplus.resolve,
-    reject: PromiseAplus.reject,
+    promise: new PromiseAplus(function(rslv, rjct){
+      resolve = rslv;
+      reject = rjct;
+    }),
+    resolve: resolve,
+    reject: reject,
   }
 }
